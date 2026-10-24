@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Modules\Accounts\Pecule.Accounts\Pecule.Accounts.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Imports\Pecule.Imports\Pecule.Imports.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Insights\Pecule.Insights\Pecule.Insights.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Notifications\Pecule.Notifications\Pecule.Notifications.csproj" />
+  </ItemGroup>
+
+</Project>

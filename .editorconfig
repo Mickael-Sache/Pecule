@@ -387,3 +387,7 @@ dotnet_naming_style.s_camelcase.required_suffix =
 dotnet_naming_style.s_camelcase.word_separator = 
 dotnet_naming_style.s_camelcase.capitalization = camel_case
 
+# CA1716 : « Imports » est un mot réservé en Visual Basic.
+# Pécule est une application 100 % C#, sans consommateur VB : la règle ne s'applique pas.
+[src/Modules/Imports/**.cs]
+dotnet_diagnostic.CA1716.severity = none

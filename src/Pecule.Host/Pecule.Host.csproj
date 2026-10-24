@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\Accounts\Pecule.Accounts\Pecule.Accounts.csproj" />
+    <ProjectReference Include="..\Modules\Accounts\Pecule.Accounts.Contracts\Pecule.Accounts.Contracts.csproj" />
+    <ProjectReference Include="..\Modules\Imports\Pecule.Imports\Pecule.Imports.csproj" />
+    <ProjectReference Include="..\Modules\Imports\Pecule.Imports.Contracts\Pecule.Imports.Contracts.csproj" />
+    <ProjectReference Include="..\Modules\Insights\Pecule.Insights\Pecule.Insights.csproj" />
+    <ProjectReference Include="..\Modules\Insights\Pecule.Insights.Contracts\Pecule.Insights.Contracts.csproj" />
+    <ProjectReference Include="..\Modules\Notifications\Pecule.Notifications\Pecule.Notifications.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>

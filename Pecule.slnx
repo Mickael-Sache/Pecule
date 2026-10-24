@@ -1,2 +1,27 @@
 <Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Pecule.Host/Pecule.Host.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Accounts/">
+    <Project Path="src/Modules/Accounts/Pecule.Accounts.Contracts/Pecule.Accounts.Contracts.csproj" />
+    <Project Path="src/Modules/Accounts/Pecule.Accounts/Pecule.Accounts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Imports/">
+    <Project Path="src/Modules/Imports/Pecule.Imports.Contracts/Pecule.Imports.Contracts.csproj" />
+    <Project Path="src/Modules/Imports/Pecule.Imports/Pecule.Imports.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Insights/">
+    <Project Path="src/Modules/Insights/Pecule.Insights.Contracts/Pecule.Insights.Contracts.csproj" />
+    <Project Path="src/Modules/Insights/Pecule.Insights/Pecule.Insights.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Notifications/">
+    <Project Path="src/Modules/Notifications/Pecule.Notifications/Pecule.Notifications.csproj" />
+  </Folder>
+  <Folder Name="/src/Shared/">
+    <Project Path="src/Shared/Pecule.SharedKernel/Pecule.SharedKernel.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Pecule.ArchitectureTests/Pecule.ArchitectureTests.csproj" />
+  </Folder>
 </Solution>
