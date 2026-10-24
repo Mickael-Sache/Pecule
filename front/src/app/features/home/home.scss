@@ -1,0 +1,10 @@
+@use 'mixins';
+
+.summary {
+  display: grid;
+  gap: var(--space-4);
+
+  @include mixins.from-md {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,19 @@
+@use 'mixins';
+
+html { font-size: 100%; }
+body { margin: 0; background: var(--surface); color: var(--ink); font-family: var(--font-sans); font-size: 1rem; line-height: 1.5; }
+h1, h2, h3, p { margin: 0; }
+h1 { font-size: 1.5rem; line-height: 2rem; }
+h2 { font-size: 1.25rem; line-height: 1.75rem; }
+a { color: var(--primary); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { @include mixins.focus-ring }
+ 
+.sr-only { @include mixins.visually-hidden; }
+.skip-link { position: absolute; left: 16px; top: -64px; padding: 8px 16px; background: var(--primary); color: var(--on-primary); border-radius: var(--radius-md); font-weight: 700; z-index: 10; }
+.skip-link:focus { top: 8px; }
+ 
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.credit { color: var(--positive); }
+.muted { color: var(--ink-muted); }
+.small { font-size: 0.875rem; line-height: 1.25rem; }

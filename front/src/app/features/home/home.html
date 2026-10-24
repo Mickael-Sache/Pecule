@@ -1,0 +1,9 @@
+<h1 tabindex="-1">Bienvenue sur Pécule</h1>
+
+@if (status.isLoading()) {
+  <p role="status">Chargement…</p>
+} @else if (status.error()) {
+  <p class="alert alert-negative" role="alert">L'API ne répond pas.</p>
+} @else if (status.hasValue()) {
+  <p>{{ status.value().application }}, version {{ version() }}</p>
+}
