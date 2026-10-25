@@ -1,0 +1,17 @@
+# .NET files from compilation
+**/bin
+**/obj
+
+# Front Angular : dependencies and generated files
+front/node_modules
+front/dist
+front/.angular
+
+# Tests : non used by container image
+tests/
+
+# Git, IDE and secrets
+.git
+.vs
+.vscode
+.env
