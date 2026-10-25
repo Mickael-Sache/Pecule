@@ -1,6 +1,6 @@
 # Pécule
 
-[![CI](https://github.com/<ton-compte>/pecule/actions/workflows/ci.yml/badge.svg)](https://github.com/<ton-compte>/pecule/actions/workflows/ci.yml)
+[![CI](https://github.com/Mickael-Sache/pecule/actions/workflows/ci.yml/badge.svg)](https://github.com/Mickael-Sache/pecule/actions/workflows/ci.yml)
 
 Application de gestion de budget personnel : import de relevés bancaires, analyse des dépenses et alertes budgétaires. Projet de portfolio en .NET 10 et Angular 22, conçu pour être conforme au RGAA 4.1 / WCAG 2.2 AA.
 
