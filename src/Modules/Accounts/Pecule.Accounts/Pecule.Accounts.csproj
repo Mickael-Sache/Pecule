@@ -5,7 +5,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pecule.Accounts.Contracts\Pecule.Accounts.Contracts.csproj" />
   </ItemGroup>
   
   <PropertyGroup>

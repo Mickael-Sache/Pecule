@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Pecule.ArchitectureTests;
+﻿namespace Pecule.ArchitectureTests;
 
 public class ModuleDependencyTests
 {
