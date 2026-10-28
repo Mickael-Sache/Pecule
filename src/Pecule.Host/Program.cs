@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 using Microsoft.AspNetCore.Antiforgery;
 
 using Pecule.Accounts;
@@ -18,6 +20,8 @@ builder.Services
 builder.Services.AddOpenApi();
 builder.Services.AddHealthChecks().AddNpgSql(builder.Configuration.GetConnectionString("Pecule")!);
 builder.Services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
+builder.Services.ConfigureHttpJsonOptions(options =>
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 var app = builder.Build();
 
