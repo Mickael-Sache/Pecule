@@ -17,6 +17,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Server">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Scalar.AspNetCore" />
   </ItemGroup>
 
@@ -24,6 +28,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>725162d6-467e-4d65-b5a4-8e37219fb402</UserSecretsId>
+	  <OpenApiGenerateDocuments>true</OpenApiGenerateDocuments>
+	  <OpenApiDocumentsDirectory>$(MSBuildProjectDirectory)/../../front/openapi</OpenApiDocumentsDirectory>
   </PropertyGroup>
 
 </Project>
