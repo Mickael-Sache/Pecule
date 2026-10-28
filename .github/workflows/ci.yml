@@ -33,10 +33,30 @@ jobs:
       - run: npx ng lint
       - run: npx ng test --watch=false
       - run: npx ng build
-
+     
   image:
     needs: [backend, frontend]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: docker build -t pecule:ci .
+      
+  api-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: front/package-lock.json
+      - run: dotnet build src/Pecule.Host -c Release
+      - run: npm ci
+        working-directory: front
+      - run: npm run generate:api
+        working-directory: front
+      - name: Le contrat d'API committé est à jour
+        run: git diff --exit-code -- front/openapi front/src/app/api
