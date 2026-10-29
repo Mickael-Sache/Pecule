@@ -17,9 +17,23 @@
             [attr.aria-invalid]="showErrors(loginForm.email)"
             [attr.aria-describedby]="showErrors(loginForm.email) ? 'email-errors' : null" />
 
-            @if (showErrors(loginForm.email)) {
-                <p id="email-error" class="error-text">{{ loginForm.email().errors()[0].message }}</p>
-            }
+        @if (showErrors(loginForm.email)) {
+            <p id="email-error" class="error-text">{{ loginForm.email().errors()[0].message }}</p>
+        }
+    </div>
+    <div class="field" [class.field-error]="showErrors(loginForm.password)">
+        <label for="password">Mot de passe</label>
+        <input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            [formField]="loginForm.password"
+            [attr.aria-invalid]="showErrors(loginForm.password)"
+            [attr.aria-describedby]="showErrors(loginForm.password) ? 'password-error' : null" />
+
+        @if (showErrors(loginForm.password)) {
+            <p id="password-error" class="error-text">{{ loginForm.password().errors()[0].message }}</p>
+        }
     </div>
     <button class="btn btn-primary" type="submit" [disabled]="loginForm().submitting()">{{ loginForm().submitting() ? 'Connexion' : 'Se connecter' }}</button>
 </form>
