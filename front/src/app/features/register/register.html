@@ -1,0 +1,89 @@
+<h1 tabindex="-1">Créer un compte</h1>
+
+<form [formRoot]="registerForm" class="card" aria-labelledby="register-title">
+  <h2 id="register-title" class="sr-only">S'incrire</h2>
+
+  @for (error of registerForm().errors(); track error.kind) {
+    <p class="alert alert-negative" role="alert">{{ error.message }}</p>
+  }
+
+  <div class="field" [class.field-error]="showErrors(registerForm.email)">
+    <label for="email">Adresse e-mail</label>
+    <input
+      id="email"
+      type="email"
+      autocomplete="email"
+      [formField]="registerForm.email"
+      [attr.aria-invalid]="showErrors(registerForm.email)"
+      [attr.aria-describedby]="showErrors(registerForm.email) ? 'email-error' : null"
+    />
+
+    @if (showErrors(registerForm.email)) {
+      <p id="email-error" class="error-text">{{ registerForm.email().errors()[0].message }}</p>
+    }
+  </div>
+  <div class="field" [class.field-error]="showErrors(registerForm.password)">
+    <label for="password">Mot de passe</label>
+    <div class="password-input">
+      <input
+        id="password"
+        [type]="showPassword() ? 'text' : 'password'"
+        autocomplete="new-password"
+        [formField]="registerForm.password"
+        [attr.aria-invalid]="showErrors(registerForm.password)"
+        [attr.aria-describedby]="
+          showErrors(registerForm.password) ? 'password-hint password-error' : 'password-hint'
+        "
+      />
+      <button
+        class="btn"
+        type="button"
+        aria-controls="password"
+        [attr.aria-pressed]="showPassword()"
+        (click)="showPassword.update(v => !v)"> {{ showPassword() ? 'Masquer' : 'Afficher' }}<span class="sr-only"> le mot de passe</span>
+      </button>
+    </div>
+
+    <p id="password-hint" class="hint">
+      12 caractères minimum, avec au moins une majuscule, une minuscule, un chiffre et un caractère
+      spécial.
+    </p>
+
+    @if (showErrors(registerForm.password)) {
+      <p id="password-error" class="error-text">
+        {{ registerForm.password().errors()[0].message }}
+      </p>
+    }
+  </div>
+  <div class="field" [class.field-error]="showErrors(registerForm.confirmPassword)">
+    <label for="confirm-password">Confirmation du mot de passe</label>
+    <div class="password-input">
+      <input
+        id="confirm-password"
+        [type]="showConfirmPassword() ? 'text' : 'password'"
+        autocomplete="new-password"
+        [formField]="registerForm.confirmPassword"
+        [attr.aria-invalid]="showErrors(registerForm.confirmPassword)"
+        [attr.aria-describedby]="showErrors(registerForm.confirmPassword) ? 'confirmPassword-error' : null"
+      />
+      <button
+        class="btn"
+        type="button"
+        aria-controls="confirm-password"
+        [attr.aria-pressed]="showConfirmPassword()"
+        (click)="showConfirmPassword.update(v => !v)"> {{ showConfirmPassword() ? 'Masquer' : 'Afficher' }}<span class="sr-only"> la confirmation du mot de passe</span>
+      </button>
+    </div>
+
+    @if (showErrors(registerForm.confirmPassword)) {
+      <p id="confirmPassword-error" class="error-text">
+        {{ registerForm.confirmPassword().errors()[0].message }}
+      </p>
+    }
+  </div>
+  <button class="btn btn-primary" type="submit" [disabled]="registerForm().submitting()">
+    Valider
+  </button>
+</form>
+
+<p>Déjà un compte ? <a routerLink="/login">Se connecter</a></p>

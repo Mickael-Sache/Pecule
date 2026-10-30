@@ -22,9 +22,8 @@ export class Auth {
 
     // Get XSRF token and search from a previous valid one
     async initialize(): Promise<void> {
-        await this.refreshXsrfToken();
-
         try {
+            await this.refreshXsrfToken();
             this.currentUser.set(await firstValueFrom(this.http.get<UserInfo>('/api/auth/manage/info')));
         } catch {
             this.currentUser.set(null);

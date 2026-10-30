@@ -7,8 +7,13 @@ export const routes: Routes = [
     loadComponent: () => import('./features/home/home').then((m) => m.Home),
   },
   {
-    path: '/login',
+    path: 'login',
     title: 'Connexion',
     loadComponent: () => import('./features/login/login').then((m) => m.Login),
+  },
+  {
+    path: 'register',
+    title: 'Créer un compte',
+    loadComponent: () => import('./features/register/register').then((m) => m.Register),
   }
 ];
