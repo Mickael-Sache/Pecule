@@ -15,7 +15,7 @@
             autocomplete="email"
             [formField]="loginForm.email"
             [attr.aria-invalid]="showErrors(loginForm.email)"
-            [attr.aria-describedby]="showErrors(loginForm.email) ? 'email-errors' : null" />
+            [attr.aria-describedby]="showErrors(loginForm.email) ? 'email-error' : null" />
 
         @if (showErrors(loginForm.email)) {
             <p id="email-error" class="error-text">{{ loginForm.email().errors()[0].message }}</p>
