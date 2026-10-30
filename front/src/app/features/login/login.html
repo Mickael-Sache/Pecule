@@ -23,13 +23,22 @@
     </div>
     <div class="field" [class.field-error]="showErrors(loginForm.password)">
         <label for="password">Mot de passe</label>
-        <input
-            id="password"
-            type="password"
-            autocomplete="current-password"
-            [formField]="loginForm.password"
-            [attr.aria-invalid]="showErrors(loginForm.password)"
-            [attr.aria-describedby]="showErrors(loginForm.password) ? 'password-error' : null" />
+        <div class="password-input">
+            <input
+                id="password"
+                [type]="showPassword() ? 'text' : 'password'"
+                autocomplete="current-password"
+                [formField]="loginForm.password"
+                [attr.aria-invalid]="showErrors(loginForm.password)"
+                [attr.aria-describedby]="showErrors(loginForm.password) ? 'password-error' : null" />
+            <button
+                class="btn"
+                type="button"
+                aria-controls="password"
+                [attr.aria-pressed]="showPassword()"
+                (click)="showPassword.update(v => !v)"> {{ showPassword() ? 'Masquer' : 'Afficher' }}<span class="sr-only"> le mot de passe</span>
+            </button>
+        </div>
 
         @if (showErrors(loginForm.password)) {
             <p id="password-error" class="error-text">{{ loginForm.password().errors()[0].message }}</p>
