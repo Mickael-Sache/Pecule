@@ -1,0 +1,13 @@
+.password-input {
+  display: flex;
+  gap: var(--space-2); // adapte au nom réel de ton token
+
+  input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  button {
+    flex-shrink: 0;
+  }
+}
