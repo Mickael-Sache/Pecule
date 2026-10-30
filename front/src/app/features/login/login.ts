@@ -16,6 +16,7 @@ export class Login {
   private readonly route = inject(ActivatedRoute);
 
   protected readonly model = signal<Credentials>({ email: '', password: '' });
+  protected readonly showPassword = signal(false);
 
   protected readonly loginForm = form(
     this.model, (path) => {
@@ -26,6 +27,7 @@ export class Login {
     {
       submission: {
         action: async (field) => {
+          this.showPassword.set(false);
           try {
             await this.auth.login(field().value());
           } catch (error) {
