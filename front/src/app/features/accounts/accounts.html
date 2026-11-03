@@ -1,0 +1,89 @@
+<h1 tabindex="-1">Mes comptes</h1>
+
+@if (accounts.isLoading()) {
+  <p>Chargement des comptes.</p>
+} @else if (accounts.error()) {
+  <p class="error">Impossible de charger les comptes. Réessayez plus tard.</p>
+} @else if (accounts.hasValue()) {
+  @if (accounts.value().length === 0) {
+    <p>Vous n'avez pas encore de compte bancaire. Créez-en un avec le formulaire ci-dessous.</p>
+  } @else {
+    <div class="card">
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Liste des comptes</caption>
+          <thead>
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">Type de compte</th>
+              <th scope="col" class="num align-end">Solde initiale</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (account of accounts.value(); track account.id) {
+              <tr>
+                <th scope="row">{{ account.name }}</th>
+                <td>{{ typeLabels[account.type] }}</td>
+                <td class="num align-end">{{ account.initialBalance | currency: account.currency }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+}
+
+<form [formRoot]="accountForm" class="card" aria-labelledby="accounts-title">
+  <h2 id="accounts-title" class="sr-only">Créer un compte bancaire.</h2>
+
+  @for (error of accountForm().errors(); track error.kind) {
+    <p class="alert alert-negative" role="alert">{{ error.message }}</p>
+  }
+
+  <div class="field" [class.field.error]="showErrors(accountForm.name)">
+    <label for="account-name">Nom du compte</label>
+    <input
+      id="account-name"
+      type="text"
+      autocomplete="off"
+      [formField]="accountForm.name"
+      [attr.aria-invalid]="showErrors(accountForm.name)"
+      [attr.aria-describedby]="showErrors(accountForm.name) ? 'account-name-errors' : null" />
+
+      @if (showErrors(accountForm.name)) {
+        @for (error of accountForm.name().errors(); track $index) {
+          <p>{{ error.message }}</p>
+        }
+      }
+  </div>
+
+  <div class="field" [class.field.error]="showErrors(accountForm.type)">
+    <label for="account-name">Type de compte</label>
+    <select id="account-type" [formField]="accountForm.type">
+      <@for (option of typeOptions; track option[0]) {
+        <option [value]="option[0]">{{ option[1] }}</option>
+      }>
+    </select>
+  </div>
+
+  <div class="field" [class.field.error]="showErrors(accountForm.initialBalance)">
+    <label for="account-name">Solde initial</label>
+    <input
+      id="account-Initialbalance"
+      type="number"
+      inputmode="decimal"
+      step="0.01"
+      autocomplete="off"
+      [formField]="accountForm.initialBalance"
+      [attr.aria-invalid]="showErrors(accountForm.initialBalance)"
+      [attr.aria-describedby]="showErrors(accountForm.initialBalance) ? 'account-initialbalance-errors' : null" />
+
+      @if (showErrors(accountForm.name)) {
+        @for (error of accountForm.initialBalance().errors(); track $index) {
+          <p>{{ error.message }}</p>
+        }
+      }
+  </div>
+  <button class="btn btn-primary" type="submit" [disabled]="accountForm().submitting()">Enregistrer</button>
+</form>
