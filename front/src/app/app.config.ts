@@ -6,6 +6,7 @@ import { PeculeTitleStrategy } from './core/pecule-title-strategy';
 import { FocusAfterNavigation } from './core/focus-after-navigation';
 import { authInterceptor } from './core/auth/auth-interceptor';
 import { Auth } from './core/auth/auth';
+import { LOCALE_ID } from '@angular/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,7 @@ export const appConfig: ApplicationConfig = {
       withXsrfConfiguration({ cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN'}),
     ),
     provideAppInitializer(() => { inject(FocusAfterNavigation) }),
-    provideAppInitializer(() => inject(Auth).initialize())
+    provideAppInitializer(() => inject(Auth).initialize()),
+    { provide: LOCALE_ID, useValue: 'fr'},
   ]
 };
