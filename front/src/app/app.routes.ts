@@ -23,10 +23,10 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () => import('./features/accounts/accounts').then((m) => m.Accounts),
   },
-  {
-    path: 'settings',
-    title: 'Paramètres du compte',
-    canActivate: [authGuard],
-    loadComponent: () => import('./features/settings/settings').then((m) => m.Settings),
-  },
+  // {
+  //   path: 'settings',
+  //   title: 'Paramètres du compte',
+  //   canActivate: [authGuard],
+  //   loadComponent: () => import('./features/settings/settings').then((m) => m.Settings),
+  // },
 ];
