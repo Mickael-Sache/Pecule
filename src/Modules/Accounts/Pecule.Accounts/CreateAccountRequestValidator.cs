@@ -9,9 +9,9 @@ internal sealed class CreateAccountRequestValidator : AbstractValidator<CreateAc
     public CreateAccountRequestValidator()
     {
         RuleFor(x => x.Name)
-            .NotEmpty().WithMessage("Account name is required.")
-            .MaximumLength(60).WithMessage("Account name must not exceed 60 characters.");
+            .NotEmpty().WithMessage("Le nom du compte est obligatoire.")
+            .MaximumLength(60).WithMessage("Le nom du compte ne peut excéder 60 caractères.");
         RuleFor(x => x.Type)
-            .IsInEnum().WithMessage("Invalid account type.");
+            .IsInEnum().WithMessage("Type de compte invalide.");
     }
 }

@@ -1,17 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormField, FormRoot, required, email, form, minLength, pattern, validate, FieldTree } from '@angular/forms/signals';
+import { FormField, FormRoot, required, email, form, minLength, pattern, validate } from '@angular/forms/signals';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Auth } from '../../core/auth/auth';
-import { HttpErrorResponse } from '@angular/common/http';
+import { showErrors } from '../../shared/forms/show-errors';
+import { validationErrors } from '../../shared/forms/validation-errors';
 
 interface RegisterForm {
   email: string;
   password: string;
   confirmPassword: string;
-}
-
-interface ValidationProblemBody {
-  errors?: Record<string, string[]>;
 }
 
 type RegisterField = 'email' | 'password';
@@ -41,6 +38,7 @@ export class Register {
   protected readonly model = signal<RegisterForm>({ email: '', password: '', confirmPassword: '' });
   protected readonly showPassword = signal(false);
   protected readonly showConfirmPassword = signal(false);
+  protected readonly showErrors = showErrors;
 
   protected readonly registerForm = form(
     this.model, (path) => {
@@ -53,7 +51,7 @@ export class Register {
       pattern(path.password, /\d/, { message: "Le mot de passe doit contenir au moins un chiffre." });
       pattern(path.password, /[^A-Za-z0-9]/, { message: "Le mot de passe doit contenir au moins un caractère spécial, par exemple ! ou ?." });
       required(path.confirmPassword, { message: 'Confirmez votre mot de passe.' });
-      validate(path.confirmPassword, (ctx) => 
+      validate(path.confirmPassword, (ctx) =>
         ctx.value() === ctx.valueOf(path.password)
         ? null
         : { kind: 'passwordMismatch', message: 'Les mots de passe ne correspondent pas.' }
@@ -69,7 +67,7 @@ export class Register {
             await this.auth.register({ email, password })
           } catch (error) {
             // 1- Identity codes errors : attached to field
-            const fieldErrors = identityErrorCodes(error).flatMap((code) => {
+            const fieldErrors = Object.keys(validationErrors(error)).flatMap((code) => {
               const entry = IDENTITY_ERRORS[code];
               return entry ? [{ kind: code, message: entry.message, fieldTree: field[entry.field]}] : [];
             });
@@ -94,17 +92,4 @@ export class Register {
       },
     },
   );
-
-  protected showErrors(field: FieldTree<string>): boolean {
-    return field().touched() && field().invalid();
-  }
-}
-
-// Send error code from Identity or none if unknown
-function identityErrorCodes(error: unknown): string[] {
-  if (!(error instanceof HttpErrorResponse) || error.status !== 400) {
-    return [];
-  }
-  const body = error.error as ValidationProblemBody | null;
-  return Object.keys(body?.errors ?? {});
 }

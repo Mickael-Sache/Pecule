@@ -1,8 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { email, FieldTree, form, FormField, FormRoot, required } from '@angular/forms/signals';
+import { email, form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Auth, Credentials } from '../../core/auth/auth';
 import { HttpErrorResponse } from '@angular/common/http';
+import { showErrors } from '../../shared/forms/show-errors';
 
 @Component({
   imports: [FormField, FormRoot, RouterLink],
@@ -17,6 +18,7 @@ export class Login {
 
   protected readonly model = signal<Credentials>({ email: '', password: '' });
   protected readonly showPassword = signal(false);
+  protected readonly showErrors = showErrors;
 
   protected readonly loginForm = form(
     this.model, (path) => {
@@ -47,8 +49,4 @@ export class Login {
       },
     },
   );
-
-  protected showErrors(field: FieldTree<string>): boolean {
-    return field().touched() && field().invalid();
-  }
 }
