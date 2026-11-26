@@ -71,8 +71,6 @@ api.MapGet("/antiforgery/token", (IAntiforgery antiforgery, HttpContext context)
 api.MapGet("/status", () => new { Application = "Pécule", Version = "0.1.0" });
 api.MapAccountEndpoints(); // Map endpoints related to the Accounts module
 
-app.MapGet("/", () => "Pécule");
-
 app.UseStaticFiles(); // Angular files will be served from wwwroot folder
 app.MapFallbackToFile("index.html");
 
