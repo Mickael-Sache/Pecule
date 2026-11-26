@@ -2,6 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using Pecule.Accounts.Contracts;
+using Pecule.SharedKernel;
+
 namespace Pecule.Imports
 {
     public static class ImportsModule
@@ -12,8 +15,8 @@ namespace Pecule.Imports
 
             services.AddDbContext<ImportsDbContext>(options => options.UseNpgsql(connectionString, npgsql => npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "imports")));
 
-            // Register services related to the Imports module here
-            // Example: services.AddScoped<IImportService, ImportService>();
+            services.AddScoped<IEventSubscriber<UserDeleted>, DeleteUserImports>();
+
             return services;
         }
 
