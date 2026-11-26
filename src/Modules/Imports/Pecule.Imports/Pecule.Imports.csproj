@@ -4,6 +4,16 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Accounts\Pecule.Accounts.Contracts\Pecule.Accounts.Contracts.csproj" />
+    <ProjectReference Include="..\Pecule.Imports.Contracts\Pecule.Imports.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Pecule.SharedKernel\Pecule.SharedKernel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+  </ItemGroup>
+
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
