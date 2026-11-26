@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using Pecule.Accounts.Contracts;
+using Pecule.SharedKernel;
 
 namespace Pecule.Accounts;
 
@@ -54,11 +55,7 @@ public static partial class AccountsModule
 
         // Register validators from the assembly containing CreateAccountRequestValidator
         services.AddValidatorsFromAssemblyContaining<CreateAccountRequestValidator>(includeInternalTypes: true);
-
-        // Register IHttpContextAccessor and CurrentUser for accessing the current user's information
-        services.AddHttpContextAccessor();
-        // Register CurrentUser as a scoped service to access the current user's ID
-        services.AddScoped<CurrentUser>();
+        services.AddScoped<IAccountDirectory, AccountDirectory>();
 
         return services;
     }
@@ -105,7 +102,7 @@ public static partial class AccountsModule
         accounts.MapPost("/", async Task<Results<Created<AccountDto>, ValidationProblem, UnauthorizedHttpResult>> (
             CreateAccountRequest request,
             IValidator<CreateAccountRequest> validator,
-            CurrentUser currentUser,
+            ICurrentUser currentUser,
             AccountsDbContext db) =>
         {
             var validation = await validator.ValidateAsync(request);
