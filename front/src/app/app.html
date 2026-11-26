@@ -4,18 +4,19 @@
     <a class="brand" routerLink="/">Pécule</a>
     <nav class="main-nav" aria-label="Navigation principale">
       <ul>
-        <li><a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" [routerLinkActiveOptions]="{ exact: true }">Accueil</a></li>
+        <li><a class="nav-link" routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" [routerLinkActiveOptions]="{ exact: true }">Accueil</a></li>
         @if(auth.isAuthenticated())
         {
-          <li><a routerLink="/accounts" routerLinkActive="active" ariaCurrentWhenActive="page">Mes comptes</a></li>
+          <li><a class="nav-link" routerLink="/accounts" routerLinkActive="active" ariaCurrentWhenActive="page">Mes comptes</a></li>
         }
       </ul>
     </nav>
     <div class="user-menu">
-      @if(auth.user(); as user)
+      @if (auth.user(); as user)
       {
         <span class="muted small">{{user.email}}</span>
-        <button class="btn btn-quiet" type="button" (click)="logout();">Se déconnecter</button>
+        <a class="nav-link" routerLink="/settings" routerLinkActive="active" ariaCurrentWhenActive="page">Paramètres</a>
+        <button class="btn btn-quiet" type="button" (click)="logout()">Se déconnecter</button>
       } @else {
         <a class="btn btn-quiet" routerLink="/login">Se connecter</a>
         <a class="btn" routerLink="/register">Créer un compte</a>

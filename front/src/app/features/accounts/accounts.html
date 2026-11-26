@@ -16,7 +16,7 @@
             <tr>
               <th scope="col">Nom</th>
               <th scope="col">Type de compte</th>
-              <th scope="col" class="num align-end">Solde initiale</th>
+              <th scope="col" class="num align-end">Solde initial</th>
             </tr>
           </thead>
           <tbody>
@@ -34,7 +34,7 @@
   }
 }
 
-<form [formRoot]="accountForm" class="card" aria-labelledby="accounts-title">
+<form [formRoot]="accountForm" class="card form" aria-labelledby="accounts-title">
   <h2 id="accounts-title" class="sr-only">Créer un compte bancaire.</h2>
 
   @for (error of accountForm().errors(); track error.kind) {

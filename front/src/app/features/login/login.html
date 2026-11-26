@@ -1,6 +1,6 @@
 <h1 tabindex="-1">Connexion</h1>
 
-<form [formRoot]="loginForm" class="card" aria-labelledby="login-title">
+<form [formRoot]="loginForm" class="card form" aria-labelledby="login-title">
     <h2 id="login-title" class="sr-only">Se connecter avec son compte</h2>
 
     @for (error of loginForm().errors(); track error.kind) {

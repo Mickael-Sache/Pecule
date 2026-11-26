@@ -1,6 +1,6 @@
 <h1 tabindex="-1">Créer un compte</h1>
 
-<form [formRoot]="registerForm" class="card" aria-labelledby="register-title">
+<form [formRoot]="registerForm" class="card form" aria-labelledby="register-title">
   <h2 id="register-title" class="sr-only">S'incrire</h2>
 
   @for (error of registerForm().errors(); track error.kind) {
