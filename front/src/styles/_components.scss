@@ -7,21 +7,74 @@
 .main-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
 .main-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: var(--radius-md); color: var(--ink); text-decoration: none; }
 .main-nav a:hover { text-decoration: underline; }
-.main-nav a[aria-current="page"] { background: var(--primary-soft); color: var(--primary); font-weight: 700; }
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &[aria-current='page'] {
+    background: var(--primary-soft);
+    color: var(--primary);
+    font-weight: 700;
+  }
+}
 .user-menu { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+
+/* Checkboxe */
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  input[type='checkbox'] {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    flex-shrink: 0;
+    accent-color: var(--primary);
+  }
+
+  label {
+    font-weight: 400;
+  }
+}
 
 /* Page */
 .page { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; display: flex; flex-direction: column; gap: 24px; }
+.page > :not(router-outlet) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
 
 /* Buttons */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--space-10); padding: 0 var(--space-4); border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface-raised); color: var(--ink); font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box; }
 .btn:hover { text-decoration: underline; }
 .btn-primary { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.btn-danger { background: var(--negative); border-color: var(--negative); color: var(--on-primary); }
 .btn-quiet { border-color: transparent; background: transparent; color: var(--primary); }
 
 /* Forms */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+
+  > .btn {
+    align-self: flex-start;
+  }
+}
 .field { display: flex; flex-direction: column; gap: var(--space-1); }
 .field label, .field legend { font-weight: 700; }
+.field .checkbox label { font-weight: 400; }
 .hint { color: var(--ink-muted); font-size: var(--font-size-small); line-height: var(--line-height-small); }
 input[type="text"], input[type="email"], input[type="password"], input[type="search"], input[type="number"], select {
   font: inherit; min-height: var(--space-10); padding: 0 var(--space-3); border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface-raised); color: var(--ink); box-sizing: border-box;

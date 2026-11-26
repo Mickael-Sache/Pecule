@@ -1,0 +1,39 @@
+<h1 tabindex="-1">Paramètres de l'application</h1>
+
+<section class="card" aria-labelledby="delete-account-title">
+  <h2 id="delete-account-title">Supprimer mon compte</h2>
+  <p>
+    La suppression efface votre compte utilisateur, votre adresse e-mail et tous vos comptes bancaires.
+    <strong>Cette opération est irréversible.</strong>
+  </p>
+
+  <form [formRoot]="deleteAccountForm" class="form">
+    <div class="field" [class.field-error]="showErrors(deleteAccountForm.confirmed)">
+      <div class="checkbox">
+        <input
+          id="delete-confirm"
+          type="checkbox"
+          [formField]="deleteAccountForm.confirmed"
+          [attr.aria-invalid]="showErrors(deleteAccountForm.confirmed)"
+          [attr.aria-describedby]="showErrors(deleteAccountForm.confirmed) ? 'delete-confirm-error' : null"
+        />
+        <label for="delete-confirm">Je comprends que cette suppression est définitive</label>
+      </div>
+      @if (showErrors(deleteAccountForm.confirmed)) {
+        <div id="delete-confirm-error" class="error-text">
+          @for (error of deleteAccountForm.confirmed().errors(); track $index) {
+            <p>{{ error.message }}</p>
+          }
+        </div>
+      }
+    </div>
+
+    @for (error of deleteAccountForm().errors(); track $index) {
+      <p class="error-text" role="alert">{{ error.message }}</p>
+    }
+
+    <button class="btn btn-danger" type="submit" [disabled]="deleteAccountForm().submitting()">
+      {{ deleteAccountForm().submitting() ? 'Suppression…' : 'Supprimer définitivement mon compte' }}
+    </button>
+  </form>
+</section>
