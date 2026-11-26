@@ -26,8 +26,11 @@ builder.Services.ConfigureHttpJsonOptions(options =>
     options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddScoped<ICurrentUser, HttpCurrentUser>();
 builder.Services.AddSingleton(TimeProvider.System);
+
+builder.Services.AddScoped<IEventBus, InMemoryEventBus>();
 
 var app = builder.Build();
 

@@ -72,13 +72,16 @@ public static partial class AccountsModule
             return TypedResults.NoContent();
         }).RequireAuthorization();
 
-        auth.MapDelete("/account", async Task<Results<NoContent, UnauthorizedHttpResult, ProblemHttpResult>> (ClaimsPrincipal principal, UserManager<User> userManager, SignInManager<User> signInManager) =>
+        auth.MapDelete("/account", async Task<Results<NoContent, UnauthorizedHttpResult, ProblemHttpResult>> (ClaimsPrincipal principal, UserManager<User> userManager, SignInManager<User> signInManager, IEventBus eventBus) =>
         {
             var user = await userManager.GetUserAsync(principal);
             if (user is null)
             {
                 return TypedResults.Unauthorized();
             }
+
+            // Set before to avoid orphan data in case of failed module deletion
+            await eventBus.PublishAsync(new UserDeleted(user.Id));
 
             var result = await userManager.DeleteAsync(user);
             if (!result.Succeeded)
