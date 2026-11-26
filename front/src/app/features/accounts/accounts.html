@@ -59,7 +59,7 @@
   </div>
 
   <div class="field" [class.field.error]="showErrors(accountForm.type)">
-    <label for="account-name">Type de compte</label>
+    <label for="account-type">Type de compte</label>
     <select id="account-type" [formField]="accountForm.type">
       <@for (option of typeOptions; track option[0]) {
         <option [value]="option[0]">{{ option[1] }}</option>
@@ -68,9 +68,9 @@
   </div>
 
   <div class="field" [class.field.error]="showErrors(accountForm.initialBalance)">
-    <label for="account-name">Solde initial</label>
+    <label for="account-initialbalance">Solde initial</label>
     <input
-      id="account-Initialbalance"
+      id="account-initialbalance"
       type="number"
       inputmode="decimal"
       step="0.01"

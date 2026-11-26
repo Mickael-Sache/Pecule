@@ -60,3 +60,38 @@ jobs:
         working-directory: front
       - name: Le contrat d'API committé est à jour
         run: git diff --exit-code -- front/openapi front/src/app/api
+        
+  e2e:
+    needs: [image]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cp .env.example .env
+      - run: docker compose up -d --build
+      - name: Attendre que l'API soit prête
+        run: |
+          for i in $(seq 1 30); do
+            curl -fs http://localhost:8080/health && exit 0
+            sleep 2
+          done
+          exit 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: front/package-lock.json
+      - run: npm ci
+        working-directory: front
+      - run: npx playwright install --with-deps chromium
+        working-directory: front
+      - run: npx playwright test --project=chromium
+        working-directory: front
+      - name: Rapport Playwright
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: front/playwright-report
+      - name: Journaux de l'application
+        if: failure()
+        run: docker compose logs app
