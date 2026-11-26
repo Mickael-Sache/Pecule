@@ -3,9 +3,11 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Antiforgery;
 
 using Pecule.Accounts;
+using Pecule.Host;
 using Pecule.Imports;
 using Pecule.Insights;
 using Pecule.Notifications;
+using Pecule.SharedKernel;
 
 using Scalar.AspNetCore;
 
@@ -23,12 +25,17 @@ builder.Services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 builder.Services.ConfigureHttpJsonOptions(options =>
     options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICurrentUser, HttpCurrentUser>();
+builder.Services.AddSingleton(TimeProvider.System);
+
 var app = builder.Build();
 
 // Migrate the database on startup if configured to do so
 if (app.Configuration.GetValue<bool>("Database:MigrateOnStartup"))
 {
     await app.Services.MigrateAccountsDatabaseAsync();
+    await app.Services.MigrateImportsDatabaseAsync();
 }
 
 app.UseAuthentication(); // Enable authentication middleware

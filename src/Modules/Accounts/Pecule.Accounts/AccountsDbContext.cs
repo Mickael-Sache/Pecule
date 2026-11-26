@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+using Pecule.SharedKernel;
+
 namespace Pecule.Accounts;
 
 public static partial class AccountsModule
 {
-    internal sealed class AccountsDbContext(DbContextOptions<AccountsDbContext> options, CurrentUser currentUser) : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options)
+    internal sealed class AccountsDbContext(DbContextOptions<AccountsDbContext> options, ICurrentUser currentUser) : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options)
     {
         public DbSet<Account> Accounts => Set<Account>();
 

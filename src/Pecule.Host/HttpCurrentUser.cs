@@ -1,10 +1,10 @@
-﻿using System.Security.Claims;
+﻿namespace Pecule.Host;
 
-using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
-namespace Pecule.Accounts;
+using Pecule.SharedKernel;
 
-internal sealed class CurrentUser(IHttpContextAccessor httpContextAccessor)
+internal sealed class HttpCurrentUser(IHttpContextAccessor httpContextAccessor) : ICurrentUser
 {
     public Guid? Id =>
         Guid.TryParse(httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier), out var id)

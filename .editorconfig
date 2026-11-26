@@ -392,3 +392,7 @@ dotnet_naming_style.s_camelcase.capitalization = camel_case
 # Pécule est une application 100 % C#, sans consommateur VB : la règle ne s'applique pas.
 [src/Modules/Imports/**.cs]
 dotnet_diagnostic.CA1716.severity = none
+
+# Migrations EF Core : code généré, non analysé
+[src/Modules/*/*/Migrations/**.cs]
+generated_code = true

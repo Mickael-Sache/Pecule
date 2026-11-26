@@ -4,6 +4,11 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Pecule.Insights.Contracts\Pecule.Insights.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Pecule.SharedKernel\Pecule.SharedKernel.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
