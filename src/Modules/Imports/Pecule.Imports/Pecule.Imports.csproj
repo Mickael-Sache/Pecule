@@ -12,6 +12,12 @@
 
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="CsvHelper" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Pecule.Imports.Tests" />
+    <InternalsVisibleTo Include="Pecule.IntegrationTests" />
   </ItemGroup>
 
   <PropertyGroup>

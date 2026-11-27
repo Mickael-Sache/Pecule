@@ -396,3 +396,6 @@ dotnet_diagnostic.CA1716.severity = none
 # Migrations EF Core : code généré, non analysé
 [src/Modules/*/*/Migrations/**.cs]
 generated_code = true
+
+[tests/Pecule.Imports.Tests/**.cs]
+dotnet_diagnostic.CA1716.severity = none
