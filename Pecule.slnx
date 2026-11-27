@@ -23,6 +23,7 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Pecule.ArchitectureTests/Pecule.ArchitectureTests.csproj" />
+    <Project Path="tests/Pecule.Imports.Tests/Pecule.Imports.Tests.csproj" />
     <Project Path="tests/Pecule.IntegrationTests/Pecule.IntegrationTests.csproj" />
   </Folder>
 </Solution>
